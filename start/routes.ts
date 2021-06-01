@@ -24,6 +24,9 @@ Route.get('/', async () => {
   return { hello: 'world' }
 })
 
-Route.get('/test/:slug/:id', 'PayrollTax.index')
+Route.get('/user', 'UserController.index')
 
-Route.post('/upload', 'PayrollTax.upload')
+Route.post('/upload', 'UserController.upload')
+Route.get('/generate', 'UserController.generate')
+Route.post('/user', 'UserController.create')
+Route.post('/login', 'UserController.login')
