@@ -1,6 +1,5 @@
 import Application from '@ioc:Adonis/Core/Application'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
-import GlobalValues from 'App/Helpers/GlobalValues'
 import ResponseBuilder from 'App/Helpers/ResponseBuilder'
 import User from 'App/Models/User'
 import { UserFactory } from 'Database/factories'
@@ -63,9 +62,6 @@ export default class UserController {
 
   public async create({ request }: HttpContextContract) {
     const requestBody = request.body()
-    const user = new User()
-    await user.fill(requestBody).save()
-    console.log(requestBody)
-    return user
+    return await User.create(requestBody)
   }
 }
