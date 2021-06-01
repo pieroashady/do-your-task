@@ -25,3 +25,5 @@ Route.get('/', async () => {
 })
 
 Route.get('/test/:slug/:id', 'PayrollTax.index')
+
+Route.post('/upload', 'PayrollTax.upload')
