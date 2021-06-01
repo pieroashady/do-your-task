@@ -1,6 +1,7 @@
 import Application from '@ioc:Adonis/Core/Application'
 import { cuid } from '@ioc:Adonis/Core/Helpers'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import ResponseBuilder from 'App/ResponseBuilder/ResponseBuilder'
 
 export default class PayrollTax {
   public async index({ request }: HttpContextContract) {
@@ -14,7 +15,10 @@ export default class PayrollTax {
     const requestBody = request.body()
 
     if (!image) {
-      return
+      const response = new ResponseBuilder()
+      response.withError(true)
+      response.withMessage('Please attach upload file')
+      return response.showResponse()
     }
 
     const fileName = `${requestBody.filename}.${image.extname}`
@@ -23,6 +27,9 @@ export default class PayrollTax {
       name: fileName,
     })
 
-    return { error: false, message: 'File uploaded successfully' }
+    const response = new ResponseBuilder()
+    response.withError(false)
+    response.withMessage('Successfully upload file')
+    return response.showResponse()
   }
 }
